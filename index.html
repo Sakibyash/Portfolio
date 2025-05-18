@@ -52,54 +52,6 @@
     .sidebar a:hover i {
       color: #f9f8f4;
     }
-    .portfolio-item {
-      position: relative;
-      overflow: hidden;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      padding: 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
-    .portfolio-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .portfolio-item img {
-      transition: transform 0.3s ease;
-      border-radius: 8px;
-    }
-    .portfolio-item:hover img {
-      transform: scale(1.05);
-    }
-    .portfolio-overlay {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: calc(100% - 40px);
-      height: calc(100% - 40px);
-      background: rgba(255, 153, 153, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 8px;
-    }
-    .portfolio-item:hover .portfolio-overlay {
-      opacity: 1;
-    }
-    .portfolio-overlay a {
-      color: #f9f8f4;
-      font-size: 18px;
-      margin: 0 10px;
-    }
-    .portfolio-overlay a:hover {
-      color: #ff6666;
-    }
     .section-title {
       position: relative;
       margin-bottom: 40px;
@@ -246,6 +198,86 @@
     .contact-info a:hover {
       text-decoration: underline;
     }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .project-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+    }
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+    .project-content {
+      padding: 20px;
+    }
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ff9999;
+      margin-bottom: 10px;
+    }
+    .project-description {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .project-meta span {
+      background: #f0f0f0;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: #444;
+    }
+    .project-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .project-actions a {
+      display: flex;
+      align-items: center;
+      padding: 8px 16px;
+      background: #ff9999;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .project-actions a:hover {
+      background: #ff6666;
+    }
+    .project-actions a i {
+      margin-right: 5px;
+    }
     @media (max-width: 768px) {
       .main-content {
         margin-left: 64px;
@@ -253,11 +285,8 @@
       .main-content.active {
         margin-left: 200px;
       }
-      .portfolio-item {
-        flex-direction: column;
-      }
-      .portfolio-item .relative {
-        width: 100%;
+      .project-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -292,7 +321,7 @@
   <div class="main-content" id="main-content">
     <!-- Home Section -->
     <section id="home" class="min-h-screen relative hero-bg">
-      <img src="path/to/your-photo.jpg" alt="Md. Sakib Hasan" class="absolute top-0 left-0 w-full h-full object-cover z-1">
+      <img src="WhatsApp Image 2024-10-17 at 05.03.41_dd132af8.jpg" alt="Md. Sakib Hasan" class="absolute top-0 left-0 w-full h-full object-cover z-1">
       <div class="text-center relative z-10 h-full flex items-center justify-center hero-content">
         <div>
           <h1 class="text-5xl font-bold text-gray-700 mb-4">Md. Sakib Hasan</h1>
@@ -394,7 +423,7 @@
             <option value="other">Other</option>
           </select>
         </div>
-        <div id="project-list" class="space-y-8 max-w-3xl mx-auto">
+        <div class="project-grid" id="project-list">
           <!-- Projects will be dynamically added here -->
         </div>
       </div>
@@ -435,7 +464,7 @@
       loop: true
     });
 
-    // Project data with categories and image placeholders
+    // Project data with categories, metadata, and image placeholders
     const projects = [
       {
         title: "Human Face Emotion Recognition",
@@ -443,7 +472,10 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier",
-        image: "Identifying Emotions SEL Presentation Colorful Cartoon Style_20250518_143624_0000.jpg"
+        image: "Identifying Emotions SEL Presentation Colorful Cartoon Style_20250518_143624_0000.jpg",
+        tech: ["Python", "PyTorch", "OpenCV", "ViT"],
+        duration: "3 months",
+        status: "Completed"
       },
       {
         title: "Anime Genre Classifier",
@@ -451,7 +483,10 @@
         category: "nlp",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Anime_Genre_Classifier",
-        image: "file_00000000dd4461f6bd34cb80d43a38e3.png"
+        image: "file_00000000dd4461f6bd34cb80d43a38e3.png",
+        tech: ["Python", "TensorFlow", "NLP"],
+        duration: "4 months",
+        status: "Completed"
       },
       {
         title: "License Plate Classifier",
@@ -459,7 +494,10 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/License_Plate_Classifier",
-        image: "file_00000000df7861f69240c6b4de2e3d2f.png"
+        image: "file_00000000df7861f69240c6b4de2e3d2f.png",
+        tech: ["Python", "YOLOv10", "OpenCV", "OCR"],
+        duration: "5 months",
+        status: "Completed"
       },
       {
         title: "Fire & Gas Detection System",
@@ -467,7 +505,10 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Fire_Gas_Leak_Detection_Vision_Model",
-        image: "Red and Yellow Illustrative Fire Emergency Poster_20250518_144825_0000.jpg"
+        image: "Red and Yellow Illustrative Fire Emergency Poster_20250518_144825_0000.jpg",
+        tech: ["Python", "Random Forest", "YOLOv10", "Gradio"],
+        duration: "6 months",
+        status: "Completed"
       },
       {
         title: "Emotion Classifier2",
@@ -475,7 +516,10 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier2",
-        image: "file_00000000a18461f6acf0985b2962738e.png"
+        image: "file_00000000a18461f6acf0985b2962738e.png",
+        tech: ["Python", "TensorFlow", "CNN"],
+        duration: "3 months",
+        status: "Completed"
       },
       {
         title: "Food Image Classifier",
@@ -483,7 +527,10 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Food_Image_Classifier",
-        image: "file_00000000890c61f9970a040e2bc74aae.png"
+        image: "file_00000000890c61f9970a040e2bc74aae.png",
+        tech: ["Python", "PyTorch", "CNN"],
+        duration: "4 months",
+        status: "Completed"
       },
       {
         title: "Flower Recognizer",
@@ -491,7 +538,10 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Flower_Recognizer",
-        image: "file_0000000083e461f8be45d6ac68c1c1d9.png"
+        image: "file_0000000083e461f8be45d6ac68c1c1d9.png",
+        tech: ["Python", "TensorFlow", "CNN"],
+        duration: "3 months",
+        status: "Completed"
       }
     ];
 
@@ -500,23 +550,28 @@
       const projectList = document.getElementById('project-list');
       projectList.innerHTML = '';
       const filteredProjects = category === "all" ? projects : projects.filter(p => p.category === category);
-      filteredProjects.forEach(project => {
+      filteredProjects.forEach((project, index) => {
         const projectCard = document.createElement('div');
-        projectCard.className = 'portfolio-item flex flex-col sm:flex-row items-center gap-6';
+        projectCard.className = 'project-card';
         projectCard.innerHTML = `
-          <div class="relative w-full sm:w-1/3">
-            <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover">
-            <div class="portfolio-overlay">
-              <a href="${project.github}" target="_blank"><i class="fab fa-github"></i></a>
-              ${project.demo ? `<a href="${project.demo}" target="_blank"><i class="fas fa-link"></i></a>` : ''}
+          <img src="${project.image}" alt="${project.title}" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title"><i class="fas fa-folder-open mr-2"></i> ${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+            <div class="project-meta">
+              ${project.tech.map(t => `<span>${t}</span>`).join('')}
+              <span>${project.duration}</span>
+              <span>${project.status}</span>
             </div>
-          </div>
-          <div class="w-full sm:w-2/3 text-center sm:text-left">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-folder-open mr-2"></i> ${project.title}</h3>
-            <p class="text-gray-600">${project.description}</p>
+            <div class="project-actions">
+              <a href="${project.github}" target="_blank"><i class="fab fa-github"></i> View Code</a>
+              ${project.demo ? `<a href="${project.demo}" target="_blank"><i class="fas fa-link"></i> Live Demo</a>` : ''}
+            </div>
           </div>
         `;
         projectList.appendChild(projectCard);
+        // Trigger animation with delay for staggered effect
+        setTimeout(() => projectCard.classList.add('visible'), index * 200);
       });
     }
 
@@ -530,7 +585,7 @@
 
     // Animation on scroll
     function animateOnScroll() {
-      const elements = document.querySelectorAll('.section-title, .hero-content, .about-content, .counter-box, .portfolio-item');
+      const elements = document.querySelectorAll('.section-title, .hero-content, .about-content, .counter-box, .project-card');
       elements.forEach(element => {
         const rect = element.getBoundingClientRect();
         if (rect.top >= 0 && rect.top < window.innerHeight - 100) {
