@@ -11,14 +11,14 @@
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-color: #f9f8f4;
-      color: #4a4a4a;
+      background-color: #ffffff;
+      color: #333333;
       scroll-behavior: smooth;
       overflow-x: hidden;
       margin: 0;
     }
     .sidebar {
-      background: linear-gradient(180deg, #ff9999 0%, #f9f8f4 100%);
+      background: linear-gradient(180deg, #1a2a44 0%, #ffffff 100%);
       transition: all 0.3s ease;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
       transform: translateX(-100%);
@@ -43,21 +43,21 @@
       transition: all 0.3s ease;
     }
     .sidebar a:hover {
-      background-color: #ff6666;
-      color: #f9f8f4;
+      background-color: #1a2a44;
+      color: #ffffff;
     }
     .sidebar a i {
       color: #333333;
     }
     .sidebar a:hover i {
-      color: #f9f8f4;
+      color: #ffffff;
     }
     .section-title {
       position: relative;
       margin-bottom: 40px;
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.5s ease;
+      transition: all 1.2s ease;
     }
     .section-title.visible {
       opacity: 1;
@@ -71,13 +71,17 @@
       transform: translateX(-50%);
       width: 50px;
       height: 3px;
-      background: #ff9999;
+      background: #1a2a44;
     }
     .hero-bg {
-      background: linear-gradient(135deg, #f9f8f4 0%, #ffcccc 100%);
-      animation: fadeIn 1s ease-in-out;
+      background: linear-gradient(135deg, #ffffff 0%, #e6ecef 100%);
+      animation: fadeIn 1.2s ease-in-out;
       position: relative;
       overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .hero-bg img {
       width: 100%;
@@ -87,12 +91,15 @@
       top: 0;
       left: 0;
       z-index: 1;
-      opacity: 0.7;
+      opacity: 0.5;
     }
     .hero-content {
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.8s ease;
+      transition: all 1.2s ease;
+      position: relative;
+      z-index: 10;
+      text-align: center;
     }
     .hero-content.visible {
       opacity: 1;
@@ -103,7 +110,7 @@
       to { opacity: 1; }
     }
     .counter-box {
-      background: #fff;
+      background: #ffffff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -117,7 +124,7 @@
       transform: translateY(0);
     }
     .counter-box i {
-      color: #ff9999;
+      color: #1a2a44;
       font-size: 30px;
       margin-bottom: 10px;
     }
@@ -165,7 +172,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      background: #fff;
+      background: #ffffff;
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -192,22 +199,24 @@
       gap: 8px;
     }
     .contact-info a {
-      color: #ff9999;
+      color: #1a2a44;
       text-decoration: none;
     }
     .contact-info a:hover {
       text-decoration: underline;
     }
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+    .project-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
     }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
     .project-card {
-      background: #fff;
+      background: #ffffff;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       overflow: hidden;
@@ -236,7 +245,7 @@
     .project-title {
       font-size: 1.5rem;
       font-weight: 600;
-      color: #ff9999;
+      color: #1a2a44;
       margin-bottom: 10px;
     }
     .project-description {
@@ -266,27 +275,39 @@
       display: flex;
       align-items: center;
       padding: 8px 16px;
-      background: #ff9999;
-      color: #fff;
+      background: #1a2a44;
+      color: #ffffff;
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.3s ease;
     }
     .project-actions a:hover {
-      background: #ff6666;
+      background: #0d1a2e;
     }
     .project-actions a i {
       margin-right: 5px;
     }
     @media (max-width: 768px) {
       .main-content {
-        margin-left: 64px;
+        margin-left: 0;
       }
       .main-content.active {
         margin-left: 200px;
       }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .about-content {
+        padding: 15px;
+      }
+      .project-container {
+        padding: 0 10px;
+      }
       .project-grid {
         grid-template-columns: 1fr;
+      }
+      .section-title {
+        margin-bottom: 20px;
       }
     }
   </style>
@@ -313,7 +334,7 @@
   </div>
 
   <!-- Menu Toggle -->
-  <button id="menu-toggle" class="fixed top-4 left-4 z-30 text-black text-2xl bg-peach-600 rounded-full p-2">
+  <button id="menu-toggle" class="fixed top-4 left-4 z-30 text-white text-2xl bg-1a2a44 rounded-full p-2">
     <i class="fas fa-bars"></i>
   </button>
 
@@ -324,9 +345,9 @@
       <img src="WhatsApp Image 2024-10-17 at 05.03.41_dd132af8.jpg" alt="Md. Sakib Hasan" class="absolute top-0 left-0 w-full h-full object-cover z-1">
       <div class="text-center relative z-10 h-full flex items-center justify-center hero-content">
         <div>
-          <h1 class="text-5xl font-bold text-gray-700 mb-4">Md. Sakib Hasan</h1>
-          <p class="text-xl text-gray-600 mb-6 typed-text"><i class="fas fa-code mr-2"></i> Machine Learning Engineer | Data Scientist | Developer</p>
-          <a href="#projects" class="bg-peach-600 text-white px-6 py-3 rounded-full hover:bg-peach-700 transition"><i class="fas fa-eye mr-2"></i> View Projects</a>
+          <h1 class="text-6rem font-bold text-333333 mb-4 animate__animated animate__fadeInDown">Md. Sakib Hasan</h1>
+          <p class="text-xl text-333333 mb-6 typed-text"><i class="fas fa-code mr-2"></i> Machine Learning Engineer | Data Scientist | Developer</p>
+          <a href="#projects" class="bg-1a2a44 text-white px-6 py-3 rounded-full hover:bg-0d1a2e transition"><i class="fas fa-eye mr-2"></i> View Projects</a>
         </div>
       </div>
     </section>
@@ -336,13 +357,13 @@
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-info-circle mr-2"></i> About Me</h2>
         <div class="about-content">
-          <p class="text-lg text-gray-600">
+          <p class="text-lg text-333333">
             I am a dedicated Machine Learning expert with a strong focus on advancing AI technologies through innovative solutions. My expertise spans GANs, Diffusion Models, NLP, Transformers, and Deep Learning, enabling me to tackle complex challenges in the field.
           </p>
-          <p class="text-lg text-gray-600">
+          <p class="text-lg text-333333">
             My passion lies in contributing to next-generation AI by developing impactful models and conducting meaningful research. With a robust analytical mindset, I specialize in solving intricate AI problems and delivering practical, deployable solutions. My portfolio showcases projects like real-time image classification, gesture recognition, and NLP applications, all accessible via web interfaces.
           </p>
-          <p class="text-lg text-gray-600">
+          <p class="text-lg text-333333">
             I combine theoretical knowledge with hands-on implementation to drive advancements in AI, aiming to create solutions that make a tangible difference in the industry.
           </p>
           <div class="contact-info">
@@ -379,66 +400,68 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50">
+    <section id="skills" class="py-20 bg-white">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-tools mr-2"></i> Skills</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-code mr-2"></i> Programming</h3>
-            <p class="text-gray-600">Python, SQL</p>
+            <h3 class="text-xl font-semibold text-1a2a44 mb-2"><i class="fas fa-code mr-2"></i> Programming</h3>
+            <p class="text-333333">Python, SQL</p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-database mr-2"></i> Data Tools</h3>
-            <p class="text-gray-600">Excel, SQL, Power BI, pandas, numpy</p>
+            <h3 class="text-xl font-semibold text-1a2a44 mb-2"><i class="fas fa-database mr-2"></i> Data Tools</h3>
+            <p class="text-333333">Excel, SQL, Power BI, pandas, numpy</p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-chart-line mr-2"></i> Analysis & Visualization</h3>
-            <p class="text-gray-600">Statistics, Matplotlib, Power BI</p>
+            <h3 class="text-xl font-semibold text-1a2a44 mb-2"><i class="fas fa-chart-line mr-2"></i> Analysis & Visualization</h3>
+            <p class="text-333333">Statistics, Matplotlib, Power BI</p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-users mr-2"></i> Soft Skills</h3>
-            <p class="text-gray-600">Communication, Problem-Solving</p>
+            <h3 class="text-xl font-semibold text-1a2a44 mb-2"><i class="fas fa-users mr-2"></i> Soft Skills</h3>
+            <p class="text-333333">Communication, Problem-Solving</p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-server mr-2"></i> Databases</h3>
-            <p class="text-gray-600">MySQL</p>
+            <h3 class="text-xl font-semibold text-1a2a44 mb-2"><i class="fas fa-server mr-2"></i> Databases</h3>
+            <p class="text-333333">MySQL</p>
           </div>
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-brain mr-2"></i> Machine Learning</h3>
-            <p class="text-gray-600">CNN, ViT, YOLOv10, Random Forest, GANs, Diffusion Models, NLP, Transformers</p>
+            <h3 class="text-xl font-semibold text-1a2a44 mb-2"><i class="fas fa-brain mr-2"></i> Machine Learning</h3>
+            <p class="text-333333">CNN, ViT, YOLOv10, Random Forest, GANs, Diffusion Models, NLP, Transformers</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20">
+    <section id="projects" class="py-20 bg-white">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-folder-open mr-2"></i> Projects</h2>
         <div class="mb-6 text-center">
-          <select id="project-filter" class="p-2 rounded bg-white text-gray-700 border border-gray-300">
+          <select id="project-filter" class="p-2 rounded bg-white text-333333 border border-gray-300">
             <option value="all">All Projects</option>
             <option value="vision">Computer Vision</option>
             <option value="nlp">NLP</option>
             <option value="other">Other</option>
           </select>
         </div>
-        <div class="project-grid" id="project-list">
-          <!-- Projects will be dynamically added here -->
+        <div class="project-container">
+          <div class="project-grid" id="project-list">
+            <!-- Projects will be dynamically added here -->
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50">
+    <section id="contact" class="py-20 bg-white">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-12 section-title"><i class="fas fa-address-book mr-2"></i> Contact Me</h2>
-        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto"><i class="fas fa-handshake mr-2"></i> Let's collaborate on exciting projects! Reach out to discuss opportunities in AI, machine learning, or data science.</p>
+        <p class="text-lg text-333333 mb-8 max-w-2xl mx-auto"><i class="fas fa-handshake mr-2"></i> Let's collaborate on exciting projects! Reach out to discuss opportunities in AI, machine learning, or data science.</p>
         <div class="flex justify-center space-x-6">
-          <a href="https://github.com/Sakibyash" target="_blank" class="text-gray-600 hover:text-peach-600 transition"><i class="fab fa-github fa-2x"></i></a>
-          <a href="https://huggingface.co/Sakibrumu" target="_blank" class="text-gray-600 hover:text-peach-600 transition"><i class="fas fa-robot fa-2x"></i></a>
-          <a href="mailto:sakibyash@gmail.com" class="text-gray-600 hover:text-peach-600 transition"><i class="fas fa-envelope fa-2x"></i></a>
-          <a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank" class="text-gray-600 hover:text-peach-600 transition"><i class="fab fa-linkedin fa-2x"></i></a>
+          <a href="https://github.com/Sakibyash" target="_blank" class="text-1a2a44 hover:text-0d1a2e transition"><i class="fab fa-github fa-2x"></i></a>
+          <a href="https://huggingface.co/Sakibrumu" target="_blank" class="text-1a2a44 hover:text-0d1a2e transition"><i class="fas fa-robot fa-2x"></i></a>
+          <a href="mailto:sakibyash@gmail.com" class="text-1a2a44 hover:text-0d1a2e transition"><i class="fas fa-envelope fa-2x"></i></a>
+          <a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank" class="text-1a2a44 hover:text-0d1a2e transition"><i class="fab fa-linkedin fa-2x"></i></a>
         </div>
       </div>
     </section>
@@ -570,7 +593,6 @@
           </div>
         `;
         projectList.appendChild(projectCard);
-        // Trigger animation with delay for staggered effect
         setTimeout(() => projectCard.classList.add('visible'), index * 200);
       });
     }
