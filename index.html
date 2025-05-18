@@ -1,50 +1,11 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Md. Sakib Hasan's Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
@@ -54,6 +15,7 @@
       color: #4a4a4a;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      margin: 0;
     }
     .sidebar {
       background: linear-gradient(180deg, #ff9999 0%, #f9f8f4 100%);
@@ -78,7 +40,7 @@
       justify-content: center;
       padding: 10px;
       color: #333333;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
     .sidebar a:hover {
       background-color: #ff6666;
@@ -93,25 +55,39 @@
     .portfolio-item {
       position: relative;
       overflow: hidden;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .portfolio-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .portfolio-item img {
       transition: transform 0.3s ease;
+      border-radius: 8px;
     }
     .portfolio-item:hover img {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
     .portfolio-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 20px;
+      left: 20px;
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
       background: rgba(255, 153, 153, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       transition: opacity 0.3s ease;
+      border-radius: 8px;
     }
     .portfolio-item:hover .portfolio-overlay {
       opacity: 1;
@@ -126,6 +102,14 @@
     }
     .section-title {
       position: relative;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .section-title::after {
       content: '';
@@ -139,7 +123,7 @@
     }
     .hero-bg {
       background: linear-gradient(135deg, #f9f8f4 0%, #ffcccc 100%);
-      animation: fadeIn 2s ease-in-out;
+      animation: fadeIn 1s ease-in-out;
       position: relative;
       overflow: hidden;
     }
@@ -153,6 +137,15 @@
       z-index: 1;
       opacity: 0.7;
     }
+    .hero-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+    .hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -163,6 +156,13 @@
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .counter-box.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .counter-box i {
       color: #ff9999;
@@ -202,6 +202,64 @@
     .sidebar.active a span {
       display: inline;
     }
+    .main-content {
+      transition: margin-left 0.3s ease;
+      margin-left: 64px;
+    }
+    .main-content.active {
+      margin-left: 200px;
+    }
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+    .about-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .contact-info div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contact-info a {
+      color: #ff9999;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 64px;
+      }
+      .main-content.active {
+        margin-left: 200px;
+      }
+      .portfolio-item {
+        flex-direction: column;
+      }
+      .portfolio-item .relative {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -226,16 +284,16 @@
   </div>
 
   <!-- Menu Toggle -->
-  <button id="menu-toggle" class="fixed top-4 left-4 z-30 text-gray-700 text-2xl bg-peach-600 text-white rounded-full p-2">
+  <button id="menu-toggle" class="fixed top-4 left-4 z-30 text-black text-2xl bg-peach-600 rounded-full p-2">
     <i class="fas fa-bars"></i>
   </button>
 
   <!-- Main Content -->
-  <div class="md:ml-64">
+  <div class="main-content" id="main-content">
     <!-- Home Section -->
     <section id="home" class="min-h-screen relative hero-bg">
-      <img src="WhatsApp Image 2024-10-17 at 05.03.41_dd132af8.jpg" alt="Md. Sakib Hasan" class="absolute top-0 left-0 w-full h-full object-cover z-1">
-      <div class="text-center animate__animated animate__fadeIn relative z-10 h-full flex items-center justify-center">
+      <img src="path/to/your-photo.jpg" alt="Md. Sakib Hasan" class="absolute top-0 left-0 w-full h-full object-cover z-1">
+      <div class="text-center relative z-10 h-full flex items-center justify-center hero-content">
         <div>
           <h1 class="text-5xl font-bold text-gray-700 mb-4">Md. Sakib Hasan</h1>
           <p class="text-xl text-gray-600 mb-6 typed-text"><i class="fas fa-code mr-2"></i> Machine Learning Engineer | Data Scientist | Developer</p>
@@ -248,17 +306,25 @@
     <section id="about" class="py-20">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-info-circle mr-2"></i> About Me</h2>
-        <div class="max-w-3xl mx-auto text-center">
+        <div class="about-content">
           <p class="text-lg text-gray-600">
-            I am a passionate Machine Learning expert with hands-on experience in GANs, Diffusion Models, NLP, Transformers, and Deep Learning. My core ambition is to contribute to next-generation AI through innovative models and impactful research. With a strong analytical mindset, I excel at solving complex AI problems and crafting practical solutions. My portfolio includes real-time image classification, gesture recognition, and NLP applications, deployed via web interfaces. I blend theoretical knowledge with practical implementation to drive meaningful advancements in the field.
+            I am a dedicated Machine Learning expert with a strong focus on advancing AI technologies through innovative solutions. My expertise spans GANs, Diffusion Models, NLP, Transformers, and Deep Learning, enabling me to tackle complex challenges in the field.
           </p>
-          <p class="text-lg text-gray-600 mt-4">
-            <strong><i class="fas fa-map-marker-alt mr-2"></i> Contact:</strong> Ahmed Nagar, Mirpur-1, Dhaka | <i class="fas fa-phone-alt mr-2"></i> +8801603741227 | <i class="fas fa-envelope mr-2"></i> <a href="mailto:sakibyash@gmail.com" class="text-peach-600 hover:underline">sakibyash@gmail.com</a><br>
-            <strong><i class="fas fa-link mr-2"></i> Profiles:</strong> <a href="https://github.com/Sakibyash" target="_blank" class="text-peach-600 hover:underline">GitHub</a> | <a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank" class="text-peach-600 hover:underline">LinkedIn</a>
+          <p class="text-lg text-gray-600">
+            My passion lies in contributing to next-generation AI by developing impactful models and conducting meaningful research. With a robust analytical mindset, I specialize in solving intricate AI problems and delivering practical, deployable solutions. My portfolio showcases projects like real-time image classification, gesture recognition, and NLP applications, all accessible via web interfaces.
           </p>
+          <p class="text-lg text-gray-600">
+            I combine theoretical knowledge with hands-on implementation to drive advancements in AI, aiming to create solutions that make a tangible difference in the industry.
+          </p>
+          <div class="contact-info">
+            <div><i class="fas fa-map-marker-alt"></i><span>Ahmed Nagar, Mirpur-1, Dhaka</span></div>
+            <div><i class="fas fa-phone-alt"></i><span>+8801603741227</span></div>
+            <div><i class="fas fa-envelope"></i><a href="mailto:sakibyash@gmail.com">sakibyash@gmail.com</a></div>
+            <div><i class="fab fa-github"></i><a href="https://github.com/Sakibyash" target="_blank">GitHub</a></div>
+            <div><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank">LinkedIn</a></div>
+          </div>
         </div>
-        <!-- Counters -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-8 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8 max-w-5xl mx-auto">
           <div class="counter-box">
             <i class="fas fa-folder-open"></i>
             <h4>7</h4>
@@ -287,7 +353,7 @@
     <section id="skills" class="py-20 bg-gray-50">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-tools mr-2"></i> Skills</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-code mr-2"></i> Programming</h3>
             <p class="text-gray-600">Python, SQL</p>
@@ -328,7 +394,7 @@
             <option value="other">Other</option>
           </select>
         </div>
-        <div id="project-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="project-list" class="space-y-8 max-w-3xl mx-auto">
           <!-- Projects will be dynamically added here -->
         </div>
       </div>
@@ -338,7 +404,7 @@
     <section id="contact" class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-12 section-title"><i class="fas fa-address-book mr-2"></i> Contact Me</h2>
-        <p class="text-lg text-gray-600 mb-8"><i class="fas fa-handshake mr-2"></i> Let's collaborate on exciting projects!</p>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto"><i class="fas fa-handshake mr-2"></i> Let's collaborate on exciting projects! Reach out to discuss opportunities in AI, machine learning, or data science.</p>
         <div class="flex justify-center space-x-6">
           <a href="https://github.com/Sakibyash" target="_blank" class="text-gray-600 hover:text-peach-600 transition"><i class="fab fa-github fa-2x"></i></a>
           <a href="https://huggingface.co/Sakibrumu" target="_blank" class="text-gray-600 hover:text-peach-600 transition"><i class="fas fa-robot fa-2x"></i></a>
@@ -354,8 +420,10 @@
     // Toggle sidebar
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.getElementById('main-content');
     menuToggle.addEventListener('click', () => {
       sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
     });
 
     // Typed.js for hero text animation
@@ -375,7 +443,7 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier",
-        image: "path/to/emotion-recognition-image.jpg"
+        image: "Identifying Emotions SEL Presentation Colorful Cartoon Style_20250518_143624_0000.jpg"
       },
       {
         title: "Anime Genre Classifier",
@@ -383,7 +451,7 @@
         category: "nlp",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Anime_Genre_Classifier",
-        image: "path/to/anime-classifier-image.jpg"
+        image: "file_00000000dd4461f6bd34cb80d43a38e3.png"
       },
       {
         title: "License Plate Classifier",
@@ -391,7 +459,7 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/License_Plate_Classifier",
-        image: "path/to/license-plate-image.jpg"
+        image: "file_00000000df7861f69240c6b4de2e3d2f.png"
       },
       {
         title: "Fire & Gas Detection System",
@@ -399,7 +467,7 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Fire_Gas_Leak_Detection_Vision_Model",
-        image: "path/to/fire-gas-detection-image.jpg"
+        image: "Red and Yellow Illustrative Fire Emergency Poster_20250518_144825_0000.jpg"
       },
       {
         title: "Emotion Classifier2",
@@ -407,7 +475,7 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier2",
-        image: "path/to/emotion-classifier2-image.jpg"
+        image: "file_00000000a18461f6acf0985b2962738e.png"
       },
       {
         title: "Food Image Classifier",
@@ -415,7 +483,7 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Food_Image_Classifier",
-        image: "path/to/food-classifier-image.jpg"
+        image: "file_00000000890c61f9970a040e2bc74aae.png"
       },
       {
         title: "Flower Recognizer",
@@ -423,7 +491,7 @@
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Flower_Recognizer",
-        image: "path/to/flower-recognizer-image.jpg"
+        image: "file_0000000083e461f8be45d6ac68c1c1d9.png"
       }
     ];
 
@@ -434,14 +502,16 @@
       const filteredProjects = category === "all" ? projects : projects.filter(p => p.category === category);
       filteredProjects.forEach(project => {
         const projectCard = document.createElement('div');
-        projectCard.className = 'portfolio-item';
+        projectCard.className = 'portfolio-item flex flex-col sm:flex-row items-center gap-6';
         projectCard.innerHTML = `
-          <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover rounded-lg mb-4">
-          <div class="portfolio-overlay">
-            <a href="${project.github}" target="_blank"><i class="fab fa-github"></i></a>
-            ${project.demo ? `<a href="${project.demo}" target="_blank"><i class="fas fa-link"></i></a>` : ''}
+          <div class="relative w-full sm:w-1/3">
+            <img src="${project.image}" alt="${project.title}" class="w-full h-40 object-cover">
+            <div class="portfolio-overlay">
+              <a href="${project.github}" target="_blank"><i class="fab fa-github"></i></a>
+              ${project.demo ? `<a href="${project.demo}" target="_blank"><i class="fas fa-link"></i></a>` : ''}
+            </div>
           </div>
-          <div class="text-center">
+          <div class="w-full sm:w-2/3 text-center sm:text-left">
             <h3 class="text-xl font-semibold text-peach-600 mb-2"><i class="fas fa-folder-open mr-2"></i> ${project.title}</h3>
             <p class="text-gray-600">${project.description}</p>
           </div>
@@ -458,15 +528,21 @@
     // Initial display
     displayProjects();
 
-    // Add animation on scroll
-    document.addEventListener('scroll', () => {
-      document.querySelectorAll('section').forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-          section.classList.add('animate__fadeInUp');
+    // Animation on scroll
+    function animateOnScroll() {
+      const elements = document.querySelectorAll('.section-title, .hero-content, .about-content, .counter-box, .portfolio-item');
+      elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top < window.innerHeight - 100) {
+          element.classList.add('visible');
         }
       });
-    });
+    }
+
+    // Initial call and event listener for scroll
+    animateOnScroll();
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
   </script>
 </body>
 </html>
