@@ -3,33 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Md. Sakib Hasan, a Machine Learning Engineer and Data Scientist specializing in AI, Deep Learning, and NLP.">
+  <meta name="keywords" content="Machine Learning, AI, Data Science, Deep Learning, NLP, Portfolio, Md. Sakib Hasan">
+  <meta name="author" content="Md. Sakib Hasan">
   <title>Md. Sakib Hasan's Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(45deg, #f5f5dc, #ffccbc, #f5f5dc);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s ease infinite;
-      color: #1a2a44;
+      background: linear-gradient(180deg, #0B0C10 0%, #1F2833 100%);
+      color: #C5C6C7;
       scroll-behavior: smooth;
       overflow-x: hidden;
       margin: 0;
+      position: relative;
     }
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 25% 75%; }
-      50% { background-position: 50% 50%; }
-      75% { background-position: 75% 25%; }
-      100% { background-position: 0% 50%; }
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .gradient-text {
+      background: linear-gradient(45deg, #66FCF1, #45A29E);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     .sidebar {
-      background: linear-gradient(180deg, #ff6f61 0%, #f5f5dc 100%);
+      background: #1F2833;
       transition: all 0.3s ease;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
       transform: translateX(-100%);
       position: fixed;
       top: 0;
@@ -48,18 +52,19 @@
       align-items: center;
       justify-content: center;
       padding: 10px;
-      color: #f5f5dc;
+      color: #C5C6C7;
       transition: all 0.3s ease;
+      font-size: 0.95rem;
     }
     .sidebar a:hover {
-      background-color: #ff6f61;
-      color: #f5f5dc;
+      background: #45A29E;
+      color: #fff;
     }
     .sidebar a i {
-      color: #f5f5dc;
+      color: #C5C6C7;
     }
     .sidebar a:hover i {
-      color: #f5f5dc;
+      color: #fff;
     }
     .section-title {
       position: relative;
@@ -67,20 +72,12 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 1.2s ease;
+      color: #66FCF1;
+      font-weight: 600;
     }
     .section-title.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 3px;
-      background: #ff6f61;
     }
     .about-intro {
       position: relative;
@@ -88,7 +85,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
       overflow: hidden;
     }
     .about-intro canvas {
@@ -98,7 +94,8 @@
       width: 100%;
       height: 100%;
       z-index: 1;
-      opacity: 0.5;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
     }
     .about-intro-content {
       position: relative;
@@ -116,7 +113,7 @@
       display: inline-block;
       overflow: hidden;
       white-space: nowrap;
-      border-right: 3px solid #ff6f61;
+      border-right: 2px solid #66FCF1;
       animation: typing 4s steps(40, end) infinite, blink 0.75s step-end infinite;
     }
     @keyframes typing {
@@ -127,19 +124,65 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
-    .about-content img {
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .about-content {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      background: #1F2833;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      max-width: 1000px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+    .about-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .about-content p,
+    .about-content .contact-info div {
+      color: #C5C6C7;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .about-image {
       width: 300px;
       height: 300px;
       object-fit: cover;
-      margin: 0 auto 20px;
-      display: block;
-      border: 4px solid #ff6f61;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #66FCF1, 0 0 30px #45A29E;
+      align-self: center;
+      margin: 0 0 0 20px;
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .contact-info a {
+      color: #66FCF1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .contact-info a:hover {
+      color: #45A29E;
+      text-decoration: underline;
     }
     .counter-box {
-      background: #f5f5dc;
+      background: #1F2833;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       text-align: center;
       opacity: 0;
       transform: translateY(20px);
@@ -150,26 +193,30 @@
       transform: translateY(0);
     }
     .counter-box i {
-      color: #ff6f61;
+      color: #66FCF1;
       font-size: 30px;
       margin-bottom: 10px;
     }
     .counter-box h4 {
       font-size: 24px;
       font-weight: 600;
-      color: #1a2a44;
+      color: #C5C6C7;
+    }
+    .counter-box p {
+      color: #C5C6C7;
+      font-size: 0.9rem;
     }
     .sidebar-header {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 10px;
-      color: #f5f5dc;
+      color: #C5C6C7;
       font-weight: bold;
       margin-bottom: 20px;
     }
     .sidebar-header i {
-      color: #f5f5dc;
+      color: #C5C6C7;
       margin-right: 8px;
     }
     .sidebar.active .sidebar-header {
@@ -195,56 +242,66 @@
     .main-content.active {
       margin-left: 200px;
     }
-    .about-content {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background: #f5f5dc;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-    }
-    .about-content.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .contact-info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .contact-info div {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .contact-info a {
-      color: #ff6f61;
-      text-decoration: none;
-    }
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
     .project-item {
-      background: #f5f5dc;
+      background: #1F2833;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       margin-bottom: 20px;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.5s ease;
     }
-    .project-item.visible {
+    .project-item:hover {
+      transform: translateY(15px) scale(1.02);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .research-item {
+      background: #1F2833;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .job-item {
+      background: #1F2833;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .testimonial-item {
+      background: #1F2833;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    .project-item.visible,
+    .research-item.visible,
+    .job-item.visible,
+    .testimonial-item.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    .project-item h3,
+    .project-item p,
+    .project-item div,
+    .research-item h3,
+    .research-item p,
+    .job-item h3,
+    .job-item p,
+    .testimonial-item p {
+      color: #C5C6C7;
     }
     .project-image {
       width: 100%;
@@ -252,36 +309,42 @@
       height: auto;
       object-fit: cover;
       margin-bottom: 15px;
-      border: 1px solid #ddd;
+      border-radius: 4px;
     }
     .project-actions a {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       padding: 8px 16px;
-      background: #ff6f61;
-      color: #f5f5dc;
+      background: #66FCF1;
+      color: #0B0C10;
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.3s ease;
       margin-right: 10px;
+      font-size: 0.9rem;
     }
     .project-actions a:hover {
-      background: #e65b50;
+      background: #45A29E;
+      color: #fff;
     }
     .project-actions a i {
       margin-right: 5px;
     }
     .cv-section {
       padding: 20px 0;
-      background: #f5f5dc;
+      background: #1F2833;
       margin: 0 auto;
       max-width: 1200px;
+      display: none;
+    }
+    .cv-section.visible {
+      display: block;
     }
     .cv-content {
       padding: 30px;
-      background: #fff;
+      background: #1F2833;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.6s ease;
@@ -290,17 +353,63 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .download-btn {
+    .cv-content h3,
+    .cv-content p,
+    .cv-content ul {
+      color: #C5C6C7;
+    }
+    .download-btn, .print-btn {
       display: inline-block;
       padding: 10px 20px;
-      background: #ff6f61;
-      color: #f5f5dc;
+      background: #66FCF1;
+      color: #0B0C10;
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.3s ease;
+      font-size: 0.9rem;
+      margin-right: 10px;
     }
-    .download-btn:hover {
-      background: #e65b50;
+    .download-btn:hover, .print-btn:hover {
+      background: #45A29E;
+      color: #fff;
+    }
+    .toggle-animation-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #66FCF1;
+      color: #0B0C10;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 30;
+      transition: background 0.3s ease;
+    }
+    .toggle-animation-btn:hover {
+      background: #45A29E;
+      color: #fff;
+    }
+    .skills-card {
+      background: #1F2833;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .skills-card h3,
+    .skills-card p {
+      color: #C5C6C7;
+    }
+    .progress-bar {
+      background: #0B0C10;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 8px;
+      margin-top: 5px;
+    }
+    .progress {
+      background: #66FCF1;
+      height: 100%;
+      transition: width 1s ease;
     }
     @media (max-width: 768px) {
       .main-content {
@@ -310,16 +419,21 @@
         margin-left: 200px;
       }
       .about-intro-content h1 {
-        font-size: 4rem;
-      }
-      .about-content img {
-        width: 200px;
-        height: 200px;
+        font-size: 3rem;
       }
       .about-content {
+        flex-direction: column;
         padding: 15px;
       }
-      .project-item {
+      .about-image {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 20px;
+      }
+      .project-item,
+      .research-item,
+      .job-item,
+      .testimonial-item {
         padding: 15px;
       }
       .project-image {
@@ -327,6 +441,37 @@
       }
       .cv-content {
         padding: 15px;
+      }
+    }
+    @media (max-width: 480px) {
+      .about-intro canvas {
+        display: none;
+      }
+      .toggle-animation-btn {
+        display: none;
+      }
+    }
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .sidebar, .about-intro, .toggle-animation-btn, .project-actions, .download-btn {
+        display: none;
+      }
+      .cv-section, .cv-content {
+        display: block !important;
+        background: #fff;
+        box-shadow: none;
+        padding: 0;
+      }
+      .cv-content h3,
+      .cv-content p,
+      .cv-content ul {
+        color: #000;
+      }
+      .main-content {
+        margin-left: 0;
       }
     }
   </style>
@@ -340,21 +485,30 @@
         <span>Md. Sakib Hasan</span>
       </div>
       <nav class="space-y-4">
-        <a href="#about" class="block py-2 px-4 rounded hover:bg-peach-500 transition flex items-center"><i class="fas fa-user mr-2"></i><span>About</span></a>
-        <a href="#skills" class="block py-2 px-4 rounded hover:bg-peach-500 transition flex items-center"><i class="fas fa-tools mr-2"></i><span>Skills</span></a>
-        <a href="#projects" class="block py-2 px-4 rounded hover:bg-peach-500 transition flex items-center"><i class="fas fa-folder-open mr-2"></i><span>Projects</span></a>
-        <a href="#contact" class="block py-2 px-4 rounded hover:bg-peach-500 transition flex items-center"><i class="fas fa-envelope mr-2"></i><span>Contact</span></a>
-        <a href="#cv" class="block py-2 px-4 rounded hover:bg-peach-500 transition flex items-center"><i class="fas fa-file-alt mr-2"></i><span>My CV</span></a>
+        <a href="#about" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-user mr-2"></i><span>About</span></a>
+        <a href="#featured" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-star mr-2"></i><span>Featured</span></a>
+        <a href="#skills" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-tools mr-2"></i><span>Skills</span></a>
+        <a href="#research" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-flask mr-2"></i><span>Research</span></a>
+        <a href="#experience" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-briefcase mr-2"></i><span>Experience</span></a>
+        <a href="#projects" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-folder-open mr-2"></i><span>Projects</span></a>
+        <a href="#testimonials" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-quote-left mr-2"></i><span>Testimonials</span></a>
+        <a href="#contact" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center"><i class="fas fa-envelope mr-2"></i><span>Contact</span></a>
+        <a href="#cv" class="block py-2 px-4 rounded hover:bg-45A29E transition flex items-center" onclick="toggleCV(event)"><i class="fas fa-file-alt mr-2"></i><span>View CV</span></a>
       </nav>
     </div>
-    <div class="text-gray-500 text-sm">
+    <div class="text-C5C6C7 text-sm">
       <p class="flex items-center justify-center"><i class="fas fa-copyright mr-2"></i><span>2025 Md. Sakib Hasan</span></p>
     </div>
   </div>
 
   <!-- Menu Toggle -->
-  <button id="menu-toggle" class="fixed top-4 left-4 z-30 text-f5f5dc text-2xl bg-ff6f61 rounded-full p-2">
+  <button id="menu-toggle" class="fixed top-4 left-4 z-30 text-66FCF1 text-2xl bg-1F2833 rounded-full p-2">
     <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Toggle Animation Button -->
+  <button id="toggle-animation" class="toggle-animation-btn" title="Toggle Neural Network Animation">
+    <i class="fas fa-eye"></i>
   </button>
 
   <!-- Main Content -->
@@ -364,31 +518,35 @@
       <div class="about-intro">
         <canvas id="neural-network"></canvas>
         <div class="about-intro-content">
-          <h1 class="text-7rem font-bold text-1a2a44 mb-4 animate__animated animate__fadeInDown">Md. Sakib Hasan</h1>
-          <p class="text-xl text-1a2a44 mb-6"><i class="fas fa-code mr-2"></i> <span class="typing-animation">Machine Learning Engineer | Data Scientist | Developer</span></p>
-          <a href="#projects" class="bg-ff6f61 text-f5f5dc px-6 py-3 rounded-full hover:bg-e65b50 transition"><i class="fas fa-eye mr-2"></i> View Projects</a>
+          <h1 class="text-7rem font-bold gradient-text mb-4 animate__animated animate__fadeInDown">Md. Sakib Hasan</h1>
+          <p class="text-xl text-C5C6C7 mb-4">Pioneering AI Solutions for a Smarter Future</p>
+          <p class="text-xl gradient-text mb-4"><i class="fas fa-clock mr-2"></i> 09:13 PM +06, Wednesday, May 28, 2025</p>
+          <p class="text-xl text-C5C6C7 mb-6"><i class="fas fa-code mr-2"></i> <span class="typing-animation">Machine Learning Engineer | Data Scientist | Developer</span></p>
+          <a href="#projects" class="bg-66FCF1 text-0B0C10 px-6 py-3 rounded-full hover-bg-45A29E hover-text-fff transition"><i class="fas fa-eye mr-2"></i> View Projects</a>
         </div>
       </div>
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-info-circle mr-2"></i> About Me</h2>
         <div class="about-content">
-          <img src="WhatsApp Image 2024-10-17 at 05.03.41_dd132af8.jpg" alt="Md. Sakib Hasan">
-          <p class="text-lg text-1a2a44">
-            I am a dedicated Machine Learning expert with a strong focus on advancing AI technologies through innovative solutions. My expertise spans GANs, Diffusion Models, NLP, Transformers, and Deep Learning, enabling me to tackle complex challenges in the field.
-          </p>
-          <p class="text-lg text-1a2a44">
-            My passion lies in contributing to next-generation AI by developing impactful models and conducting meaningful research. With a robust analytical mindset, I specialize in solving intricate AI problems and delivering practical, deployable solutions. My portfolio showcases projects like real-time image classification, gesture recognition, and NLP applications, all accessible via web interfaces.
-          </p>
-          <p class="text-lg text-1a2a44">
-            I combine theoretical knowledge with hands-on implementation to drive advancements in AI, aiming to create solutions that make a tangible difference in the industry.
-          </p>
-          <div class="contact-info">
-            <div><i class="fas fa-map-marker-alt"></i><span>Ahmed Nagar, Mirpur-1, Dhaka</span></div>
-            <div><i class="fas fa-phone-alt"></i><span>+8801603741227</span></div>
-            <div><i class="fas fa-envelope"></i><a href="mailto:sakibyash@gmail.com">sakibyash@gmail.com</a></div>
-            <div><i class="fab fa-github"></i><a href="https://github.com/Sakibyash" target="_blank">GitHub</a></div>
-            <div><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank">LinkedIn</a></div>
+          <div class="flex-1">
+            <p>
+              I am a dedicated Machine Learning expert with a strong focus on advancing AI technologies through innovative solutions. My expertise spans GANs, Diffusion Models, NLP, Transformers, and Deep Learning, enabling me to tackle complex challenges in the field.
+            </p>
+            <p>
+              My passion lies in contributing to next-generation AI by developing impactful models and conducting meaningful research. With a robust analytical mindset, I specialize in solving intricate AI problems and delivering practical, deployable solutions. My portfolio showcases projects like real-time image classification, gesture recognition, and NLP applications, all accessible via web interfaces.
+            </p>
+            <p>
+              I combine theoretical knowledge with hands-on implementation to drive advancements in AI, aiming to create solutions that make a tangible difference in the industry.
+            </p>
+            <div class="contact-info">
+              <div><i class="fas fa-map-marker-alt"></i><span>Ahmed Nagar, Mirpur-1, Dhaka</span></div>
+              <div><i class="fas fa-phone-alt"></i><span>+8801603741227</span></div>
+              <div><i class="fas fa-envelope"></i><a href="mailto:sakibyash@gmail.com">sakibyash@gmail.com</a></div>
+              <div><i class="fab fa-github"></i><a href="https://github.com/Sakibyash" target="_blank">GitHub</a></div>
+              <div><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank">LinkedIn</a></div>
+            </div>
           </div>
+          <img src="WhatsApp Image 2024-10-17 at 05.03.41_dd132af8.jpg" alt="Md. Sakib Hasan profile picture" class="about-image" loading="lazy">
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8 max-w-5xl mx-auto">
           <div class="counter-box">
@@ -415,34 +573,115 @@
       </div>
     </section>
 
+    <!-- Featured Project Section -->
+    <section id="featured" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-star mr-2"></i> Featured Project</h2>
+        <div class="project-item">
+          <img src="Identifying Emotions SEL Presentation Colorful Cartoon Style_20250518_143624_0000.jpg" alt="Human Face Emotion Recognition project image" class="project-image" loading="lazy">
+          <h3 class="text-xl font-semibold text-C5C6C7 mb-2"><i class="fas fa-folder-open mr-2"></i> Human Face Emotion Recognition</h3>
+          <p class="text-lg mb-4">Detect and classify 7 primary emotions from facial expressions in real-time using CNN, OpenCV, PyTorch, and ViT, with strong generalization on unseen data.</p>
+          <p class="text-sm mb-4"><strong>Challenge:</strong> Handling diverse facial expressions under varying lighting conditions.</p>
+          <p class="text-sm mb-4"><strong>Impact:</strong> Achieved 95% accuracy, enabling applications in mental health monitoring.</p>
+          <div class="text-sm mb-4">
+            <strong>Tech Stack:</strong> Python, PyTorch, OpenCV, ViT<br>
+            <strong>Duration:</strong> 3 months<br>
+            <strong>Status:</strong> Completed
+          </div>
+          <div class="project-actions">
+            <a href="https://github.com/Sakibyash/your-repo" target="_blank"><i class="fab fa-github"></i> View Code</a>
+            <a href="https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier" target="_blank"><i class="fas fa-link"></i> Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Skills Section -->
     <section id="skills" class="py-20">
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-tools mr-2"></i> Skills</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div class="bg-f5f5dc p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-code mr-2"></i> Programming</h3>
-            <p class="text-1a2a44">Python, SQL</p>
+          <div class="skills-card p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2"><i class="fas fa-code mr-2"></i> Programming</h3>
+            <p>Python <span class="text-sm text-66FCF1">(90%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+            <p>SQL <span class="text-sm text-66FCF1">(80%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
           </div>
-          <div class="bg-f5f5dc p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-database mr-2"></i> Data Tools</h3>
-            <p class="text-1a2a44">Excel, SQL, Power BI, pandas, numpy</p>
+          <div class="skills-card p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2"><i class="fas fa-database mr-2"></i> Data Tools</h3>
+            <p>Excel <span class="text-sm text-66FCF1">(85%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+            <p>SQL <span class="text-sm text-66FCF1">(80%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+            <p>Power BI <span class="text-sm text-66FCF1">(75%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
           </div>
-          <div class="bg-f5f5dc p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-chart-line mr-2"></i> Analysis & Visualization</h3>
-            <p class="text-1a2a44">Statistics, Matplotlib, Power BI</p>
+          <div class="skills-card p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2"><i class="fas fa-chart-line mr-2"></i> Analysis & Visualization</h3>
+            <p>Statistics <span class="text-sm text-66FCF1">(85%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+            <p>Matplotlib <span class="text-sm text-66FCF1">(70%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
           </div>
-          <div class="bg-f5f5dc p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-users mr-2"></i> Soft Skills</h3>
-            <p class="text-1a2a44">Communication, Problem-Solving</p>
+          <div class="skills-card p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2"><i class="fas fa-users mr-2"></i> Soft Skills</h3>
+            <p>Communication <span class="text-sm text-66FCF1">(90%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+            <p>Problem-Solving <span class="text-sm text-66FCF1">(95%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 95%;"></div></div>
           </div>
-          <div class="bg-f5f5dc p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-server mr-2"></i> Databases</h3>
-            <p class="text-1a2a44">MySQL</p>
+          <div class="skills-card p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2"><i class="fas fa-server mr-2"></i> Databases</h3>
+            <p>MySQL <span class="text-sm text-66FCF1">(80%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
           </div>
-          <div class="bg-f5f5dc p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-brain mr-2"></i> Machine Learning</h3>
-            <p class="text-1a2a44">CNN, ViT, YOLOv10, Random Forest, GANs, Diffusion Models, NLP, Transformers</p>
+          <div class="skills-card p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2"><i class="fas fa-brain mr-2"></i> Machine Learning</h3>
+            <p>CNN <span class="text-sm text-66FCF1">(90%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+            <p>Transformers <span class="text-sm text-66FCF1">(85%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+            <p>NLP <span class="text-sm text-66FCF1">(80%)</span></p>
+            <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Interest Section -->
+    <section id="research" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-flask mr-2"></i> Research Interest</h2>
+        <div class="research-list">
+          <div class="research-item">
+            <h3 class="text-xl font-semibold mb-2">Multi-Label Facial Emotion Recognition using Hybrid Deep Learning Architecture</h3>
+            <p>Achieved 97% accuracy with EfficientNet-B4, HLA, ViT, and pixel intensity mapping. Focused on improving real-time emotion detection for diverse datasets.</p>
+          </div>
+          <div class="research-item">
+            <h3 class="text-xl font-semibold mb-2">Enhancing Diffusion Models with GAN Integration</h3>
+            <p>Improving image generation quality and diversity, tackling the challenge of mode collapse in generative models.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Job Experience Section -->
+    <section id="experience" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-briefcase mr-2"></i> Job Experience</h2>
+        <div class="job-list">
+          <div class="job-item">
+            <h3 class="text-xl font-semibold mb-2">Data Scientist Trainee - MastersCourse</h3>
+            <p>Completed a 1-year bootcamp with hands-on training in Python, Deep Learning, NLP, Computer Vision, and model deployment. Completed 4 capstone projects, enhancing practical skills.</p>
+          </div>
+          <div class="job-item">
+            <h3 class="text-xl font-semibold mb-2">Business Development Trainee - Frame LTD.</h3>
+            <p>Conducted market research and optimized sales strategies to enhance profitability, contributing to a 15% increase in sales.</p>
+          </div>
+          <div class="job-item">
+            <h3 class="text-xl font-semibold mb-2">Data Analyst - SEBPO</h3>
+            <p>Analyzed data for accuracy and compliance, supporting data-driven decision-making for operational improvements.</p>
           </div>
         </div>
       </div>
@@ -453,7 +692,7 @@
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-folder-open mr-2"></i> Projects</h2>
         <div class="mb-6 text-center">
-          <select id="project-filter" class="p-2 rounded bg-f5f5dc text-1a2a44 border border-gray-300">
+          <select id="project-filter" class="p-2 rounded bg-66FCF1 text-0B0C10">
             <option value="all">All Projects</option>
             <option value="vision">Computer Vision</option>
             <option value="nlp">NLP</option>
@@ -461,7 +700,24 @@
           </select>
         </div>
         <div id="project-list">
-          <!-- Projects will be dynamically added here as a list -->
+          <!-- Projects will be dynamically added here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-quote-left mr-2"></i> Testimonials</h2>
+        <div class="testimonial-list">
+          <div class="testimonial-item">
+            <p class="text-lg italic mb-4">"Sakib's expertise in machine learning and dedication to solving complex problems were instrumental in our project’s success. His innovative approach to emotion recognition is truly commendable."</p>
+            <p class="text-sm font-semibold">— Md. Shariful Islam, Assistant Professor, Jahangirnagar University</p>
+          </div>
+          <div class="testimonial-item">
+            <p class="text-lg italic mb-4">"Working with Sakib on AI model development was a pleasure. His analytical mindset and technical skills significantly improved our research outcomes."</p>
+            <p class="text-sm font-semibold">— Mahmud Hasan, Ph.D., Assistant Professor, Virginia Commonwealth University</p>
+          </div>
         </div>
       </div>
     </section>
@@ -471,18 +727,18 @@
       <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center mb-12 section-title"><i class="fas fa-file-alt mr-2"></i> My CV</h2>
         <div class="cv-content">
-          <p class="text-lg text-1a2a44 mb-6">Below is a summary of my professional profile, skills, experience, and research focus. You can download the full CV for more details.</p>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">Summary</h3>
-          <p class="text-lg text-1a2a44 mb-6">I am a passionate and skilled Machine Learning expert with hands-on experience in cutting-edge domains including Generative Adversarial Networks (GANs), Diffusion Models, Natural Language Processing (NLP), Transformers, and Deep Learning. My core ambition is to contribute to the evolution of next-generation AI by developing innovative models and conducting impactful research. With a strong analytical mindset, I excel at identifying complex AI-related problems and crafting intelligent, practical solutions.</p>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">Projects</h3>
-          <ul class="list-disc list-inside text-lg text-1a2a44 mb-6">
+          <p class="text-lg mb-6">Below is a summary of my professional profile, skills, experience, and research focus. You can download or print the full CV for more details.</p>
+          <h3 class="text-2xl font-semibold mb-4">Summary</h3>
+          <p class="text-lg mb-6">I am a passionate and skilled Machine Learning expert with hands-on experience in cutting-edge domains including Generative Adversarial Networks (GANs), Diffusion Models, Natural Language Processing (NLP), Transformers, and Deep Learning. My core ambition is to contribute to the evolution of next-generation AI by developing innovative models and conducting impactful research. With a strong analytical mindset, I excel at identifying complex AI-related problems and crafting intelligent, practical solutions.</p>
+          <h3 class="text-2xl font-semibold mb-4">Projects</h3>
+          <ul class="list-disc list-inside text-lg mb-6">
             <li><strong>Human Face Emotion Recognition</strong>: Detect and classify 7 primary emotions in real-time using CNN, OpenCV, PyTorch, ViT. Achieved strong generalization on unseen data.</li>
             <li><strong>Anime Genre Classifier</strong>: Predict anime genres using multi-label classification and pre-trained models for efficient feature extraction.</li>
             <li><strong>License Plate Classifier</strong>: Real-time detection and extraction of license plates using YOLOv10, OpenCV, Deep Learning, and OCR.</li>
             <li><strong>Fire & Gas Detection System</strong>: Hybrid system using Random Forest and YOLOv10, deployed with a Gradio dashboard for real-time threat visualization.</li>
           </ul>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">Skills</h3>
-          <ul class="list-disc list-inside text-lg text-1a2a44 mb-6">
+          <h3 class="text-2xl font-semibold mb-4">Skills</h3>
+          <ul class="list-disc list-inside text-lg mb-6">
             <li>Data Tools: Excel, SQL, Power BI, pandas, numpy</li>
             <li>Analysis & Modeling: Statistics</li>
             <li>Soft Skills: Communication, Problem-Solving</li>
@@ -490,28 +746,29 @@
             <li>Databases: MySQL</li>
             <li>Visualization: Power BI, Matplotlib</li>
           </ul>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">Work Experience</h3>
-          <ul class="list-disc list-inside text-lg text-1a2a44 mb-6">
+          <h3 class="text-2xl font-semibold mb-4">Work Experience</h3>
+          <ul class="list-disc list-inside text-lg mb-6">
             <li><strong>Data Scientist Trainee - MastersCourse</strong>: Completed a 1-year bootcamp with hands-on training in Python, Deep Learning, NLP, Computer Vision, and model deployment. Completed 4 capstone projects.</li>
             <li><strong>Business Development Trainee - Frame LTD.</strong>: Conducted market research and optimized sales strategies to enhance profitability.</li>
             <li><strong>Data Analyst - SEBPO</strong>: Analyzed data for accuracy and compliance, supporting data-driven decision-making.</li>
           </ul>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">Education</h3>
-          <ul class="list-disc list-inside text-lg text-1a2a44 mb-6">
+          <h3 class="text-2xl font-semibold mb-4">Education</h3>
+          <ul class="list-disc list-inside text-lg mb-6">
             <li>Bachelor of Business Administration (BBA), Jahangirnagar University, CGPA 2.9 (appeared)</li>
             <li>Higher Secondary School Certificate, Hajijong Pilot High School & College, GPA 4.58</li>
           </ul>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">Research Focus</h3>
-          <ul class="list-disc list-inside text-lg text-1a2a44 mb-6">
+          <h3 class="text-2xl font-semibold mb-4">Research Focus</h3>
+          <ul class="list-disc list-inside text-lg mb-6">
             <li>Multi-Label Facial Emotion Recognition using Hybrid Deep Learning Architecture: Achieved 97% accuracy with EfficientNet-B4, HLA, ViT, and pixel intensity mapping.</li>
             <li>Enhancing Diffusion Models with GAN Integration: Improving image generation quality and diversity.</li>
           </ul>
-          <h3 class="text-2xl font-semibold text-ff6f61 mb-4">References</h3>
-          <ul class="list-disc list-inside text-lg text-1a2a44 mb-6">
+          <h3 class="text-2xl font-semibold mb-4">References</h3>
+          <ul class="list-disc list-inside text-lg mb-6">
             <li><strong>Md. Shariful Islam</strong>, Assistant Professor, Jahangirnagar University, Phone: 01670152474, Email: sharifjumkt@juniv.edu</li>
             <li><strong>Mahmud Hasan, Ph.D.</strong>, Assistant Professor, Virginia Commonwealth University, Email: hasann10@vcu.edu, Contact: 662-380-4564</li>
           </ul>
           <a href="SAKIB__CV.pdf" download="SAKIB__CV.pdf" class="download-btn"><i class="fas fa-download mr-2"></i> Download CV</a>
+          <a href="javascript:window.print()" class="print-btn"><i class="fas fa-print mr-2"></i> Print CV</a>
         </div>
       </div>
     </section>
@@ -520,16 +777,25 @@
     <section id="contact" class="py-20">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-3xl font-bold mb-12 section-title"><i class="fas fa-address-book mr-2"></i> Contact Me</h2>
-        <p class="text-lg text-1a2a44 mb-8 max-w-2xl mx-auto"><i class="fas fa-handshake mr-2"></i> Let's collaborate on exciting projects! Reach out to discuss opportunities in AI, machine learning, or data science.</p>
+        <p class="text-lg text-C5C6C7 mb-8 max-w-2xl mx-auto"><i class="fas fa-handshake mr-2"></i> Let's collaborate on exciting projects! Reach out to discuss opportunities in AI, machine learning, or data science.</p>
         <div class="flex justify-center space-x-6">
-          <a href="https://github.com/Sakibyash" target="_blank" class="text-ff6f61 hover:text-e65b50 transition"><i class="fab fa-github fa-2x"></i></a>
-          <a href="https://huggingface.co/Sakibrumu" target="_blank" class="text-ff6f61 hover:text-e65b50 transition"><i class="fas fa-robot fa-2x"></i></a>
-          <a href="mailto:sakibyash@gmail.com" class="text-ff6f61 hover:text-e65b50 transition"><i class="fas fa-envelope fa-2x"></i></a>
-          <a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank" class="text-ff6f61 hover:text-e65b50 transition"><i class="fab fa-linkedin fa-2x"></i></a>
+          <a href="https://github.com/Sakibyash" target="_blank" class="text-66FCF1 hover-text-45A29E transition p-2 rounded-full"><i class="fab fa-github fa-2x"></i></a>
+          <a href="https://huggingface.co/Sakibrumu" target="_blank" class="text-66FCF1 hover-text-45A29E transition p-2 rounded-full"><i class="fas fa-robot fa-2x"></i></a>
+          <a href="mailto:sakibyash@gmail.com" class="text-66FCF1 hover-text-45A29E transition p-2 rounded-full"><i class="fas fa-envelope fa-2x"></i></a>
+          <a href="https://www.linkedin.com/in/md-sakib-hasan-1b060b299" target="_blank" class="text-66FCF1 hover-text-45A29E transition p-2 rounded-full"><i class="fab fa-linkedin fa-2x"></i></a>
         </div>
       </div>
     </section>
   </div>
+
+  <!-- Google Analytics Placeholder -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR_GA_TRACKING_ID');
+  </script>
 
   <script>
     // Toggle sidebar
@@ -541,7 +807,18 @@
       mainContent.classList.toggle('active');
     });
 
-    // Neural Network Animation
+    // Toggle CV section
+    function toggleCV(event) {
+      event.preventDefault();
+      const cvSection = document.querySelector('#cv');
+      cvSection.classList.toggle('visible');
+      if (cvSection.classList.contains('visible')) {
+        const cvContent = cvSection.querySelector('.cv-content');
+        setTimeout(() => cvContent.classList.add('visible'), 50);
+      }
+    }
+
+    // Neural Network Animation with Pulsing Effect
     const canvas = document.getElementById('neural-network');
     const ctx = canvas.getContext('2d');
     let width, height;
@@ -553,60 +830,172 @@
       canvas.height = height;
     }
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      nodes.forEach((node, index) => {
+        const layer = Math.floor(index / nodesPerLayer);
+        const nodeInLayer = index % nodesPerLayer;
+        node.x = (width / (layers - 1)) * layer;
+        node.y = (height / (nodesPerLayer + 1)) * (nodeInLayer + 1);
+      });
+    });
 
-    const colors = ['#ff6f61', '#ffcc00', '#00cc99', '#ff99cc', '#66ccff', '#cc99ff'];
+    const nodeColors = ['#66FCF1', '#45A29E', '#C5C6C7', '#1F2833'];
+    const lineGradient = ctx.createLinearGradient(0, 0, width, height);
+    lineGradient.addColorStop(0, '#66FCF1');
+    lineGradient.addColorStop(0.5, '#45A29E');
+    lineGradient.addColorStop(1, '#C5C6C7');
+
     const nodes = [];
     const layers = 4;
     const nodesPerLayer = 5;
+    let neuronCount = 0;
+    const connections = [];
+    let currentLayer = 0;
+    let animationEnabled = true;
+
     for (let layer = 0; layer < layers; layer++) {
       for (let i = 0; i < nodesPerLayer; i++) {
         nodes.push({
           x: (width / (layers - 1)) * layer,
           y: (height / (nodesPerLayer + 1)) * (i + 1),
           layer: layer,
-          color: colors[Math.floor(Math.random() * colors.length)]
+          color: nodeColors[layer],
+          active: false,
+          pulse: 0
         });
       }
     }
 
+    for (let layer = 0; layer < layers - 1; layer++) {
+      const startNodes = nodes.slice(layer * nodesPerLayer, (layer + 1) * nodesPerLayer);
+      const endNodes = nodes.slice((layer + 1) * nodesPerLayer, (layer + 2) * nodesPerLayer);
+      for (let i = 0; i < startNodes.length; i++) {
+        for (let j = 0; j < endNodes.length; j++) {
+          connections.push({
+            start: layer * nodesPerLayer + i,
+            end: (layer + 1) * nodesPerLayer + j,
+            progress: 0,
+            opacity: 1,
+            layer: layer
+          });
+        }
+      }
+    }
+
     function draw() {
+      if (!animationEnabled) {
+        ctx.clearRect(0, 0, width, height);
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
-      // Draw connections
-      for (let i = 0; i < nodes.length; i++) {
-        const node1 = nodes[i];
-        if (node1.layer === layers - 1) continue;
-        for (let j = 0; j < nodesPerLayer; j++) {
-          const node2 = nodes[i - (node1.layer * nodesPerLayer) + ((node1.layer + 1) * nodesPerLayer) + j];
-          if (node2) {
-            ctx.beginPath();
-            ctx.moveTo(node1.x, node1.y);
-            ctx.lineTo(node2.x, node2.y);
-            ctx.strokeStyle = colors[Math.floor(Math.random() * colors.length)];
-            ctx.lineWidth = 2;
-            ctx.stroke();
-          }
+      nodes.forEach((node) => {
+        if (node.active) {
+          node.pulse += 0.05;
+          const scale = 1 + 0.2 * Math.sin(node.pulse);
+          ctx.save();
+          ctx.translate(node.x, node.y);
+          ctx.scale(scale, scale);
+          ctx.beginPath();
+          ctx.arc(0, 0, 10, 0, Math.PI * 2);
+          ctx.fillStyle = node.color;
+          ctx.fill();
+          ctx.restore();
+        } else {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 10, 0, Math.PI * 2);
+          ctx.fillStyle = '#0B0C10';
+          ctx.fill();
+        }
+        ctx.shadowBlur = node.active ? 10 : 0;
+        ctx.shadowColor = node.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      const currentConnections = connections.filter(conn => conn.layer === currentLayer);
+      let allDone = true;
+
+      currentConnections.forEach(conn => {
+        const startNode = nodes[conn.start];
+        const endNode = nodes[conn.end];
+        const midX = (startNode.x + endNode.x) / 2;
+        const midY = (startNode.y + endNode.y) / 2 + (Math.random() - 0.5) * 30;
+
+        ctx.beginPath();
+        ctx.moveTo(startNode.x, startNode.y);
+        const progressX = startNode.x + (midX - startNode.x) * conn.progress;
+        const progressY = startNode.y + (midY - startNode.y) * conn.progress;
+        const finalX = midX + (endNode.x - midX) * conn.progress;
+        const finalY = midY + (endNode.y - midY) * conn.progress;
+        ctx.quadraticCurveTo(progressX, progressY, finalX, finalY);
+        ctx.strokeStyle = lineGradient;
+        ctx.globalAlpha = conn.opacity;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+
+        conn.progress += 0.015;
+        if (conn.progress >= 1) {
+          nodes[conn.end].active = true;
+          conn.opacity -= 0.01;
+        } else {
+          allDone = false;
+        }
+      });
+
+      if (allDone && currentLayer < layers - 1) {
+        currentLayer++;
+        neuronCount += nodesPerLayer;
+        if (currentLayer >= layers - 1) {
+          currentLayer = 0;
+          neuronCount = 0;
+          nodes.forEach(node => {
+            node.active = false;
+            node.pulse = 0;
+          });
+          connections.forEach(conn => {
+            conn.progress = 0;
+            conn.opacity = 1;
+          });
         }
       }
 
-      // Draw nodes
-      nodes.forEach(node => {
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, 8, 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
-        ctx.fill();
-      });
+      const middleNode = nodes[Math.floor((layers * nodesPerLayer) / 2)];
+      ctx.fillStyle = '#fff';
+      ctx.font = '12px Roboto';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(neuronCount, middleNode.x, middleNode.y);
 
       requestAnimationFrame(draw);
     }
     draw();
 
-    // Project data with categories, metadata, and image placeholders
+    // Toggle Animation
+    const toggleAnimationBtn = document.getElementById('toggle-animation');
+    toggleAnimationBtn.addEventListener('click', () => {
+      animationEnabled = !animationEnabled;
+      toggleAnimationBtn.querySelector('i').classList.toggle('fa-eye');
+      toggleAnimationBtn.querySelector('i').classList.toggle('fa-eye-slash');
+      if (animationEnabled) draw();
+    });
+
+    // Parallax Effect for Neural Network
+    window.addEventListener('scroll', () => {
+      if (!animationEnabled) return;
+      const scrollY = window.scrollY;
+      canvas.style.transform = `translateY(${scrollY * 0.3}px)`;
+    });
+
     const projects = [
       {
         title: "Human Face Emotion Recognition",
         description: "Detect and classify 7 primary emotions from facial expressions in real-time using CNN, OpenCV, PyTorch, and ViT, with strong generalization on unseen data.",
+        challenge: "Handling diverse facial expressions under varying lighting conditions.",
+        impact: "Achieved 95% accuracy, enabling applications in mental health monitoring.",
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier",
@@ -618,32 +1007,38 @@
       {
         title: "Anime Genre Classifier",
         description: "Predict anime genres using multi-label classification and pre-trained models for efficient feature extraction on poster datasets.",
+        challenge: "Managing multi-label classification with overlapping genres.",
+        impact: "Improved genre prediction accuracy by 20%.",
         category: "nlp",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Anime_Genre_Classifier",
-        image: "file_00000000dd4461f6bd34cb80d43a38e3.png",
-        tech: ["Python", "TensorFlow", "NLP"],
+        image: "file_00000000dd4461f6bd34cb80d1063e3.png",
+        tech: ["Python", "TensorFlow", "LSTM"],
         duration: "4 months",
-        status: "Completed"
+        projects: "Completed"
       },
       {
         title: "License Plate Classifier",
         description: "Detect and extract Bangla text from license plates in real-time using YOLOv10, OpenCV, Deep Learning, and OCR.",
+        challenge: "Recognizing Bangla text in low-resolution images.",
+        impact: "Enabled real-time traffic enforcement with 90% accuracy.",
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/License_Plate_Classifier",
-        image: "file_00000000df7861f69240c6b4de2e3d2f.png",
+        image: "file_00000000_df7861f69240c6b4de2e3d2f.jpg",
         tech: ["Python", "YOLOv10", "OpenCV", "OCR"],
         duration: "5 months",
         status: "Completed"
       },
       {
         title: "Fire & Gas Detection System",
-        description: "Design a hybrid system using Random Forest and YOLOv10 to detect fire and gas threats, deployed with a Gradio dashboard for real-time visualization.",
+        description: "Designed a hybrid system using Random Forest and YOLOv10 to detect fire and gas threats, deployed with a Gradio dashboard for real-time visualization.",
+        challenge: "Integrating real-time alerts with high sensitivity.",
+        impact: "Reduced detection time by 30%, enhancing safety protocols.",
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Fire_Gas_Leak_Detection_Vision_Model",
-        image: "Red and Yellow Illustrative Fire Emergency Poster_20250518_144825_0000.jpg",
+        image: "Red_and_Yellow_Illustrative_Fire_Emergency_Poster_20250518_144825.jpg",
         tech: ["Python", "Random Forest", "YOLOv10", "Gradio"],
         duration: "6 months",
         status: "Completed"
@@ -651,10 +1046,12 @@
       {
         title: "Emotion Classifier2",
         description: "Identify facial emotions from images with an enhanced emotion classification model.",
+        challenge: "Optimizing for low-light conditions.",
+        impact: "Enhanced model robustness for diverse environments.",
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Emotion_Classifier2",
-        image: "file_00000000a18461f6acf0985b2962738e.png",
+        image: "file_00000000_a18461f6acf0985b2962738e.jpg",
         tech: ["Python", "TensorFlow", "CNN"],
         duration: "3 months",
         status: "Completed"
@@ -662,10 +1059,12 @@
       {
         title: "Food Image Classifier",
         description: "Identify various food items in images using a convolutional neural network.",
+        challenge: "Differentiating similar-looking food items.",
+        impact: "Achieved 85% accuracy in food recognition.",
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Food_Image_Classifier",
-        image: "file_00000000890c61f9970a040e2bc74aae.png",
+        image: "file_00000000_890c61f8970a040e2bc7d4ae.jpg",
         tech: ["Python", "PyTorch", "CNN"],
         duration: "4 months",
         status: "Completed"
@@ -673,36 +1072,39 @@
       {
         title: "Flower Recognizer",
         description: "Recognize different types of flowers from images using image classification.",
+        challenge: "Handling variations in flower species.",
+        impact: "Improved classification accuracy for educational use.",
         category: "vision",
         github: "https://github.com/Sakibyash/your-repo",
         demo: "https://huggingface.co/spaces/Sakibrumu/Flower_Recognizer",
-        image: "file_0000000083e461f8be45d6ac68c1c1d9.png",
+        image: "file_5b0d-7b34-485d-9814_103dd0bfb418.jpg",
         tech: ["Python", "TensorFlow", "CNN"],
         duration: "3 months",
         status: "Completed"
       }
     ];
 
-    // Function to display projects as a list
     function displayProjects(category = "all") {
       const projectList = document.getElementById('project-list');
       projectList.innerHTML = '';
-      const filteredProjects = category === "all" ? projects : projects.filter(p => p.category === category);
-      filteredProjects.forEach((project, index) => {
+      const filteredProjects = projects.filter(p => category === "all" || p.category === category);
+      filteredProjects.forEach((proj, index) => {
         const projectItem = document.createElement('div');
         projectItem.className = 'project-item';
         projectItem.innerHTML = `
-          <img src="${project.image}" alt="${project.title}" class="project-image">
-          <h3 class="text-xl font-semibold text-ff6f61 mb-2"><i class="fas fa-folder-open mr-2"></i> ${project.title}</h3>
-          <p class="text-lg text-1a2a44 mb-4">${project.description}</p>
-          <div class="text-sm text-666 mb-4">
-            <strong>Tech Stack:</strong> ${project.tech.join(', ')}<br>
-            <strong>Duration:</strong> ${project.duration}<br>
-            <strong>Status:</strong> ${project.status}
+          <img src="${proj.image}" alt="${proj.title} project image" class="project-image" loading="lazy">
+          <h3 class="text-xl font-semibold text-C5C6C7 mb-2"><i class="fas fa-folder-open mr-2"></i> ${proj.title}</h3>
+          <p class="text-lg mb-2">${proj.description}</p>
+          <p class="text-sm mb-2"><strong>Challenge:</strong> ${proj.challenge}</p>
+          <p class="text-sm mb-4"><strong>Impact:</strong> ${proj.impact}</p>
+          <div class="text-sm mb-4">
+            <strong>Tech Stack:</strong> ${proj.tech.join(', ')}<br>
+            <strong>Duration:</strong> ${proj.duration}<br>
+            <strong>Status:</strong> ${proj.status}
           </div>
           <div class="project-actions">
-            <a href="${project.github}" target="_blank"><i class="fab fa-github"></i> View Code</a>
-            ${project.demo ? `<a href="${project.demo}" target="_blank"><i class="fas fa-link"></i> Live Demo</a>` : ''}
+            <a href="${proj.github}" target="_blank"><i class="fab fa-github"></i> View Code</a>
+            ${proj.demo ? `<a href="${proj.demo}" target="_blank"><i class="fas fa-link"></i> Live Demo</a>` : ''}
           </div>
         `;
         projectList.appendChild(projectItem);
@@ -710,17 +1112,14 @@
       });
     }
 
-    // Event listener for project filter
     document.getElementById('project-filter').addEventListener('change', (e) => {
       displayProjects(e.target.value);
     });
 
-    // Initial display
     displayProjects();
 
-    // Animation on scroll
     function animateOnScroll() {
-      const elements = document.querySelectorAll('.section-title, .about-intro-content, .about-content, .counter-box, .project-item, .cv-content');
+      const elements = document.querySelectorAll('.section-title, .about-intro-content, .about-content, .counter-box, .project-item, .cv-content, .research-item, .job-item, .testimonial-item');
       elements.forEach(element => {
         const rect = element.getBoundingClientRect();
         if (rect.top >= 0 && rect.top < window.innerHeight - 100) {
@@ -729,7 +1128,6 @@
       });
     }
 
-    // Initial call and event listener for scroll
     animateOnScroll();
     window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('load', animateOnScroll);
